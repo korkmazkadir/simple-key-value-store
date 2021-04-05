@@ -21,7 +21,7 @@ func main() {
 	pairs := createRandomPairs(100, 1000000)
 
 	var wg sync.WaitGroup
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 100; i++ {
 		wg.Add(1)
 		go func(index int, wg *sync.WaitGroup) {
 			defer wg.Done()
