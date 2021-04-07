@@ -7,7 +7,7 @@ type Client struct {
 	rpcClient *rpc.Client
 }
 
-// NewClient creates a nee keyvalue store client
+// NewClient creates a new keyvalue store client
 func NewClient() (*Client, error) {
 
 	rpcClient, err := rpc.Dial("unix", "/tmp/keyvalue-store.sock")

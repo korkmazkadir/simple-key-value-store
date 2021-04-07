@@ -6,7 +6,7 @@ import (
 	"net/rpc"
 	"os"
 
-	"../../simplekeyvalue"
+	simplekeyvalue "github.com/korkmazkadir/simple-key-value-store"
 )
 
 const sockAddr = "/tmp/keyvalue-store.sock"

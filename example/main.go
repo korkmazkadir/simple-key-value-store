@@ -5,10 +5,11 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"log"
+	mathRand "math/rand"
 	"sync"
 	"time"
 
-	"../../simplekeyvalue"
+	simplekeyvalue "github.com/korkmazkadir/simple-key-value-store"
 )
 
 type pair struct {
@@ -68,6 +69,9 @@ func createRandomPairs(numberOfPairs int, sizeOfValue int) []pair {
 func putAllpairs(pairs []pair, c *simplekeyvalue.Client) {
 
 	for _, p := range pairs {
+
+		time.Sleep(time.Millisecond * time.Duration(mathRand.Intn(250)))
+
 		start := time.Now()
 		c.Put(p.key, p.value)
 		log.Printf("%s\n", time.Since(start))
@@ -79,6 +83,9 @@ func getAllPairs(pairs []pair, c *simplekeyvalue.Client) {
 
 	h := sha256.New()
 	for _, p := range pairs {
+
+		time.Sleep(time.Millisecond * time.Duration(mathRand.Intn(250)))
+
 		h.Reset()
 		start := time.Now()
 		value := c.Get(p.key)
