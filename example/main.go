@@ -60,7 +60,8 @@ func createRandomPairs(numberOfPairs int, sizeOfValue int) []pair {
 	for i := 0; i < numberOfPairs; i++ {
 		h.Reset()
 		bytes := createRandomByteArray(sizeOfValue)
-		pairs = append(pairs, pair{key: string(h.Sum(bytes)), value: bytes})
+		h.Write(bytes)
+		pairs = append(pairs, pair{key: string(h.Sum(nil)), value: bytes})
 	}
 
 	return pairs
@@ -89,8 +90,9 @@ func getAllPairs(pairs []pair, c *simplekeyvalue.Client) {
 		h.Reset()
 		start := time.Now()
 		value := c.Get(p.key)
+		h.Write(value)
 		elapsed := time.Since(start)
-		result := p.key == string(h.Sum(value))
+		result := p.key == string(h.Sum(nil))
 		log.Printf("%t\t%s\n", result, elapsed)
 	}
 
